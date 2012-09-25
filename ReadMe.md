@@ -1,3 +1,6 @@
+NOTE: Mac Port Branch
+This branch is a work in progress. Use at your own risk.
+
 About
 -----
 
