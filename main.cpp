@@ -7,6 +7,11 @@
 
 #include <math.h>
 
+#ifdef __APPLE__
+#include <stdlib.h>
+#include <string.h>
+#endif
+
 #include "bc7_compressed_block.h"
 #include "bc7_decompress.h"
 #include "CUDA/bc7_cuda.h"
@@ -64,7 +69,7 @@ static void bc7_compare_images(uint8_t const* p_original, uint8_t const* p_bc7_i
 
 	} // end for
 
-	printf("RGBA absolute error: %I64u\n", absolute_error);
+	printf("RGBA absolute error: %llu\n", absolute_error);
 
 	mse = mse / (4.0 * num_pixels);
 	printf("RGBA mean-squared error: %f\n", mse);
@@ -73,7 +78,11 @@ static void bc7_compare_images(uint8_t const* p_original, uint8_t const* p_bc7_i
 	printf("RGBA root-mean-squared error: %f\n", rmse);
 }
 
+#ifdef WIN32
 int _tmain(int argc, _TCHAR* argv[])
+#elif __APPLE__
+int main(int argc, char *argv[])
+#endif
 {
 	scoped_timer::initialize();
 

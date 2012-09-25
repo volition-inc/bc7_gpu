@@ -477,14 +477,14 @@ static bool bc7_get_bits(uint8_t& bits, size_t& bit_index,
 
 	if (num_bits > 8) {
 
-		printf("bc7_get_bits: Too many bits requested: '%u', max is 8!\n", num_bits);
+		printf("bc7_get_bits: Too many bits requested: '%u', max is 8!\n", (unsigned int)num_bits);
 		return false;
 	}
 
 	if ((bit_index + num_bits) > (8 * buffer_size)) {
 
 		printf("bc7_get_bits: Requesting too many bits (bit index: %u, num bits: %u), "
-				 "buffer size is '%u' bytes!\n", bit_index, num_bits, buffer_size);
+				 "buffer size is '%u' bytes!\n", (unsigned int)bit_index, (unsigned int)num_bits, (unsigned int)buffer_size);
 		return false;
 	}
 

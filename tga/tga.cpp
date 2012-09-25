@@ -3,7 +3,15 @@
 // All rights reserved.
 //
 
+#ifdef WIN32
 #include <malloc.h>
+#elif __APPLE__
+#include <stdlib.h>
+#include "platform.h"
+#else
+#error "UNSUPPORTED PLATFORM"
+#endif
+
 #include <stdint.h>
 #include <stdio.h>
 
@@ -67,7 +75,7 @@
 uint8_t* tga_load(tga_header& header, char const* p_filename)
 {
 	FILE* p_infile;
-	errno_t result = fopen_s(&p_infile, p_filename, "rb");
+	plat_err result = plat_fopen_s(&p_infile, p_filename, "rb");
 	if (result != 0) {
 
 		printf("Failed to open \"%s\"!\n", p_filename);
@@ -107,7 +115,7 @@ uint8_t* tga_load(tga_header& header, char const* p_filename)
 	uint8_t* p_image_data = reinterpret_cast< uint8_t* >(malloc(data_size));
 	if (p_image_data == NULL) {
 
-		printf("Failed to allocate %u bytes for the image \"%s\"!\n", data_size, p_filename);
+		printf("Failed to allocate %u bytes for the image \"%s\"!\n", (unsigned int)data_size, p_filename);
 		return NULL;
 	}
 
@@ -161,7 +169,7 @@ bool tga_write(tga_header const& header, char const* p_filename,
 	}
 
 	FILE* p_outfile;
-	errno_t result = fopen_s(&p_outfile, p_filename, "wb");
+	plat_err result = plat_fopen_s(&p_outfile, p_filename, "wb");
 	if (result != 0) {
 
 		printf("Failed to open \"%s\"!\n", p_filename);

@@ -5,7 +5,13 @@
 
 #include <stdio.h>
 
+#ifdef WIN32
 #include <cl/opencl.h>
+#elif __APPLE__
+#include <OpenCL/opencl.h>
+#else
+#error "UNSUPPORTED PLATFORM"
+#endif
 
 #include "bc7_opencl.h"
 #include "scoped_timer.h"
@@ -74,7 +80,7 @@ static bool bc7_opencl_create_and_build_program(cl_program& program, char const*
 
 	// Load the code.
 	FILE* p_file = NULL;
-	errno_t fopen_result = fopen_s(&p_file, p_program_filename, "rb");
+	plat_err fopen_result = plat_fopen_s(&p_file, p_program_filename, "rb");
 	if (fopen_result != 0) {
 
 		printf("Failed to open \"%s\"!\n", p_program_filename);
@@ -111,9 +117,9 @@ static bool bc7_opencl_create_and_build_program(cl_program& program, char const*
 
 	// Setup the compile options.
 	char compile_options[256] = {0};
-	strncat_s(compile_options, sizeof(compile_options), "-Werror ", _TRUNCATE);
-	strncat_s(compile_options, sizeof(compile_options), "-cl-denorms-are-zero ", _TRUNCATE);
-	strncat_s(compile_options, sizeof(compile_options), "-cl-fast-relaxed-math ", _TRUNCATE);
+	plat_strncat_s(compile_options, sizeof(compile_options), "-Werror ");
+	plat_strncat_s(compile_options, sizeof(compile_options), "-cl-denorms-are-zero ");
+	plat_strncat_s(compile_options, sizeof(compile_options), "-cl-fast-relaxed-math ");
 
 	// Build the program.
 	result = clBuildProgram(program, 1, &device_id, compile_options, NULL, NULL);		
@@ -124,7 +130,9 @@ static bool bc7_opencl_create_and_build_program(cl_program& program, char const*
 		char message[128 * 1024];
 		result = clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, sizeof(message), message, NULL);
 		if (result == CL_SUCCESS) {
-
+#ifdef __APPLE__
+#pragma GCC diagnostic ignored "-Wformat-security"
+#endif
 			printf(message);
 		}
 

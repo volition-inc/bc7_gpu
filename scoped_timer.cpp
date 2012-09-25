@@ -12,4 +12,4 @@
 // --------------------
 
 // Allocate the static member.
-LARGE_INTEGER scoped_timer::m_frequency;
+double scoped_timer::m_frequency;

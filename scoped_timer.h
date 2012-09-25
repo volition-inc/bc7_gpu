@@ -8,8 +8,9 @@
 #ifndef __SCOPED_TIMER_H
 #define __SCOPED_TIMER_H
 
-#include <windows.h>
 #include <stdio.h>
+
+#include "platform.h"
 
 // --------------------
 //
@@ -32,32 +33,31 @@ struct scoped_timer {
 	// Initialize the scoped_timer system.
 	static void initialize()
 	{			
-		QueryPerformanceFrequency(&m_frequency);
+		m_frequency = plat_perf_frequency();
 	}
 
 	// Constructor.
 	scoped_timer(char const* p_label)
 		: m_label(p_label)
 	{ 
-		QueryPerformanceCounter(&m_start);
+		m_start = plat_perf_counter();
 	}
 
 	// Destructor.
 	~scoped_timer()
 	{
-		LARGE_INTEGER end;
-		QueryPerformanceCounter(&end);
+		double end = plat_perf_counter();
 
-		double elapsed_time = (end.QuadPart - m_start.QuadPart) / static_cast< double >(m_frequency.QuadPart);
-
+		double elapsed_time = (end - m_start) / m_frequency;
+		
 		printf("%s : %.3f seconds\n", m_label, elapsed_time);
 	}
 
 	// The frequency of the timer.
-	static LARGE_INTEGER m_frequency;
+	static double m_frequency;
 
 	// The starting time.
-	LARGE_INTEGER m_start;
+	double m_start;
 
 	// The label for the timed scope.
 	char const* m_label;		
