@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\OpenCL">
+      <UniqueIdentifier>{fdf4748f-7f14-4a42-be9c-81377cb3b7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CUDA">
+      <UniqueIdentifier>{8108e729-4573-480b-8231-7f002598cda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tga">
+      <UniqueIdentifier>{3fed62ee-2935-47e4-94fb-8dc1558ebd19}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="OpenCL\BC7.opencl">
+      <Filter>Source Files\OpenCL</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CUDA\bc7_cuda.h">
+      <Filter>Source Files\CUDA</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCL\bc7_opencl.h">
+      <Filter>Source Files\OpenCL</Filter>
+    </ClInclude>
+    <ClInclude Include="tga\tga.h">
+      <Filter>Source Files\tga</Filter>
+    </ClInclude>
+    <ClInclude Include="bc7_compressed_block.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bc7_decompress.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scoped_timer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bc7_gpu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scoped_timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CUDA\bc7_cuda.cpp">
+      <Filter>Source Files\CUDA</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCL\bc7_opencl.cpp">
+      <Filter>Source Files\OpenCL</Filter>
+    </ClCompile>
+    <ClCompile Include="tga\tga.cpp">
+      <Filter>Source Files\tga</Filter>
+    </ClCompile>
+    <ClCompile Include="bc7_decompress.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="CUDA\BC7.cu">
+      <Filter>Source Files\CUDA</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
