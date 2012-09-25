@@ -1,7 +1,9 @@
 .DS_Store
 CUDA/BC7.ptx
+Debug/
 Release/
 bc7_gpu.opensdf
 bc7_gpu.sdf
 bc7_gpu.vcxproj.user
 ipch/
+*.o
