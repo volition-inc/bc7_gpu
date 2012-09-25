@@ -46,7 +46,7 @@ measure of the set of pixels. The more linear a set of pixels are, the better th
 a line segment. I have found that just testing all the shapes resulted in higher quality and about
 the same speed when using less Gradient Descent iterations.
 
-Once the best shapes to refine are chosen, a bounding box is found for each set of pixels. The 
+Once the shapes to refine are chosen, a bounding box is found for each set of pixels. The 
 minimum and maximum are used as the initial endpoints for the line segment. Gradient Descent is then 
 used over several iterations to adjust the endpoints to minimize the error using floating point 
 precision. Once that is finished, the endpoints are quantized to the correct precision and the 
